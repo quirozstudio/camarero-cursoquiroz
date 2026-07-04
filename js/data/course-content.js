@@ -495,28 +495,28 @@ export const moduleContent = {
       },
       {
         id: "bar-setup-2",
-        prompt: "Si eres nuevo y ves la barra desordenada, ¿qué debes evitar?",
+        prompt: "Si eres nuevo y ves la barra desordenada, ¿cuál es la mejor forma de actuar?",
         correctExplanation:
-          "Correcto. Cambiar cosas importantes sin preguntar puede romper la organización del local.",
+          "Correcto. Ayudas con tareas visibles y poco invasivas, pero respetas la organización del local antes de cambiar cosas importantes.",
         options: [
           {
             id: "a",
-            label: "Limpiar una mancha visible.",
+            label: "Limpiar lo evidente, reponer lo básico si sabes dónde está y preguntar antes de mover cosas importantes.",
+            isCorrect: true,
             explanation:
-              "Eso normalmente ayuda y no altera la organización del equipo.",
+              "Correcto. Es una forma útil de ayudar sin alterar el sistema de trabajo del equipo.",
           },
           {
             id: "b",
-            label: "Reponer servilletas si sabes dónde están.",
+            label: "Esperar quieto hasta que alguien te dé una orden exacta.",
             explanation:
-              "Eso suele ser una tarea útil y poco invasiva.",
+              "No es lo ideal. Si hay tareas visibles y sencillas, puedes adelantarlas con criterio.",
           },
           {
             id: "c",
             label: "Cambiar la colocación de todo sin preguntar.",
-            isCorrect: true,
             explanation:
-              "Correcto. Puede desordenar el sistema que usa el equipo.",
+              "No. Puede desordenar el sistema que usa el equipo y hacer perder tiempo a tus compañeros.",
           },
         ],
       },
