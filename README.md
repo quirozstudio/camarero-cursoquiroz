@@ -31,3 +31,14 @@ start-primer-turno.bat
 - 11:00 · Terraza
 - 13:30 · Comedor
 - 16:00 · Fin del turno
+
+## Funcionalidades actuales
+
+- Línea temporal con módulos bloqueados hasta completar el anterior.
+- Cinco preguntas por módulo y feedback de respuestas.
+- Examen final de 10 preguntas con nota mínima del 80%.
+- Progreso, intentos y perfil guardados en el navegador.
+- Certificado con código único e impresión o guardado como PDF desde el navegador.
+- Navegación con rutas compartibles e historial del navegador.
+
+La autenticación entre dispositivos y el pago online quedan fuera de esta versión para mantenerla compatible con GitHub Pages sin conectar todavía un backend.

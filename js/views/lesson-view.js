@@ -9,7 +9,7 @@ import {
   renderReminderCard,
   renderSummaryPanel,
 } from "../components/learning-components.js";
-import { getModuleById, getNextModule } from "../services/course-service.js";
+import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js";
 import { getState, saveState } from "../services/storage-service.js";
 import { moduleContent } from "../data/course-content.js";
 import { gradeQuiz } from "../services/quiz-service.js";
@@ -19,6 +19,20 @@ export const renderLesson = ({ state, course, region }) => {
   const module = getModuleById(moduleId);
   const content = moduleContent[module.id] || { blocks: [], quiz: [] };
   const mode = state.params.mode || "learn";
+
+  if (!isModuleUnlocked(state, course, module.id) && !state.progress[module.id]?.completed) {
+    return `
+      <section class="view">
+        <article class="test-shell quiz-result-shell">
+          <span class="eyebrow subtle">Módulo bloqueado</span>
+          ${icon("lock")}
+          <h2>Completa el módulo anterior para continuar</h2>
+          <p class="lesson-copy">El recorrido está diseñado para avanzar como un primer turno real, paso a paso.</p>
+          <button class="btn" data-route="course">${icon("book")}Volver al recorrido</button>
+        </article>
+      </section>
+    `;
+  }
 
   if (state.params.completed === true || state.params.completed === "true") {
     return renderCompletion({ module, course, state });

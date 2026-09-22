@@ -1,5 +1,5 @@
 import { icon } from "../components/icons.js";
-import { getCourseModules } from "../services/course-service.js";
+import { getCourseModules, isModuleUnlocked } from "../services/course-service.js";
 
 export const renderCourse = ({ state, course, region }) => {
   const modules = getCourseModules(course);
@@ -22,12 +22,14 @@ export const renderCourse = ({ state, course, region }) => {
         ${modules
           .map((module) => {
             const progress = state.progress[module.id];
+            const unlocked = isModuleUnlocked(state, course, module.id);
+            const status = progress?.completed ? "Completado" : unlocked ? "Disponible" : "Bloqueado";
             return `
-              <article class="timeline-point ${progress?.completed ? "completed" : ""}">
+              <article class="timeline-point ${progress?.completed ? "completed" : ""} ${!unlocked ? "locked" : ""}">
                 <div class="timeline-rail">
                   <span class="timeline-dot"></span>
                 </div>
-                <button class="timeline-card" data-open-module="${module.id}">
+                <button class="timeline-card" ${unlocked ? `data-open-module="${module.id}"` : "disabled"} aria-disabled="${!unlocked}">
                   <span class="timeline-time">${module.time}</span>
                   <div>
                     <h3>${module.title}</h3>
@@ -36,9 +38,9 @@ export const renderCourse = ({ state, course, region }) => {
                   </div>
                   <div class="timeline-meta">
                     <span>${module.estimatedMinutes} min</span>
-                    <span>${progress?.completed ? "Completado" : "Preparado"}</span>
+                    <span>${status}</span>
                   </div>
-                  <span class="timeline-action">${icon("arrow")}</span>
+                  <span class="timeline-action">${icon(unlocked ? "arrow" : "lock")}</span>
                 </button>
               </article>
             `;

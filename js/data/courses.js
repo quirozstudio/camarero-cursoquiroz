@@ -66,7 +66,7 @@ export const modules = [
     moduleName: "Módulo 4 · Cafés",
     shortTitle: "Cafés",
     estimatedMinutes: 20,
-    summary: "Base visual para aprender el flujo de cafés sin contenido definitivo.",
+    summary: "Flujo de cafés, preparación de la zona y coordinación con el equipo.",
   },
   {
     id: "terrace-service",
@@ -86,7 +86,7 @@ export const modules = [
     moduleName: "Módulo 6 · Servicio de comidas",
     shortTitle: "Comedor",
     estimatedMinutes: 24,
-    summary: "Servicio de comida preparado para bloques, práctica y test.",
+    summary: "Servicio de platos, retirada y comunicación con la sala.",
   },
   {
     id: "shift-close",

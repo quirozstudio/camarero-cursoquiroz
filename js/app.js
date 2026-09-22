@@ -18,13 +18,29 @@ const readRouteFromUrl = () => {
     params: {
       moduleId: searchParams.get("moduleId") || undefined,
       mode: searchParams.get("mode") || undefined,
+      questionIndex: searchParams.get("questionIndex") || undefined,
+      completed: searchParams.get("completed") || undefined,
     },
   };
+};
+
+const updateUrl = (route, params = {}, replace = false) => {
+  const searchParams = new URLSearchParams({ route });
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== null && value !== "") {
+      searchParams.set(key, String(value));
+    }
+  });
+
+  const url = `${window.location.pathname}?${searchParams.toString()}`;
+  window.history[replace ? "replaceState" : "pushState"]({}, "", url);
 };
 
 const navigate = (route, params = {}) => {
   const state = getState();
   saveState({ ...state, route, params });
+  updateUrl(route, params);
   render();
 };
 
@@ -66,7 +82,18 @@ const bindGlobalEvents = () => {
 const urlRoute = readRouteFromUrl();
 if (urlRoute) {
   saveState({ ...getState(), ...urlRoute });
+} else {
+  const state = getState();
+  updateUrl(state.route, state.params, true);
 }
+
+window.addEventListener("popstate", () => {
+  const routeFromUrl = readRouteFromUrl();
+  if (routeFromUrl) {
+    saveState({ ...getState(), ...routeFromUrl });
+    render();
+  }
+});
 
 document.documentElement.dataset.theme = getState().theme;
 render();

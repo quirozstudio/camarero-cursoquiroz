@@ -5,6 +5,7 @@ const navItems = [
   ["home", "Inicio", "home"],
   ["dashboard", "Dashboard", "chart"],
   ["course", "Turno", "book"],
+  ["exam", "Examen", "check"],
   ["certificate", "Certificado", "award"],
   ["auth", "Cuenta", "user"],
 ];
