@@ -1,8 +1,8 @@
-import { icon } from "../components/icons.js";
-import { finalExamTemplates } from "../data/exams.js";
-import { getCourseStats } from "../services/course-service.js";
-import { gradeQuiz } from "../services/quiz-service.js";
-import { getState, saveState } from "../services/storage-service.js";
+import { icon } from "../components/icons.js?v=0.2.1";
+import { finalExamTemplates } from "../data/exams.js?v=0.2.1";
+import { getCourseStats } from "../services/course-service.js?v=0.2.1";
+import { gradeQuiz } from "../services/quiz-service.js?v=0.2.1";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.1";
 
 const getExam = (course) => finalExamTemplates.find((exam) => exam.courseId === course.id) || finalExamTemplates[0];
 

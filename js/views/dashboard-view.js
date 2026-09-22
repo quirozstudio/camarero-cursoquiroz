@@ -1,5 +1,5 @@
-import { icon } from "../components/icons.js";
-import { getCourseStats } from "../services/course-service.js";
+import { icon } from "../components/icons.js?v=0.2.1";
+import { getCourseStats } from "../services/course-service.js?v=0.2.1";
 
 export const renderDashboard = ({ state, course }) => {
   const stats = getCourseStats(state, course);

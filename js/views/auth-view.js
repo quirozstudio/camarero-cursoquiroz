@@ -1,4 +1,4 @@
-import { getState, saveState } from "../services/storage-service.js";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.1";
 
 const escapeHtml = (value = "") =>
   String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);

@@ -1,4 +1,4 @@
-import { icon } from "../components/icons.js";
+import { icon } from "../components/icons.js?v=0.2.1";
 import {
   renderAdviceCard,
   renderChapterBanner,
@@ -8,11 +8,11 @@ import {
   renderPracticeCard,
   renderReminderCard,
   renderSummaryPanel,
-} from "../components/learning-components.js";
-import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js";
-import { getState, saveState } from "../services/storage-service.js";
-import { moduleContent } from "../data/course-content.js";
-import { gradeQuiz } from "../services/quiz-service.js";
+} from "../components/learning-components.js?v=0.2.1";
+import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js?v=0.2.1";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.1";
+import { moduleContent } from "../data/course-content.js?v=0.2.1";
+import { gradeQuiz } from "../services/quiz-service.js?v=0.2.1";
 
 export const renderLesson = ({ state, course, region }) => {
   const moduleId = state.params.moduleId || "arrival";

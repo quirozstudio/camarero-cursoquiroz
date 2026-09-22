@@ -1,4 +1,4 @@
-import { courses } from "../data/courses.js";
+import { courses } from "../data/courses.js?v=0.2.1";
 
 const key = "quiroz-academy-state-v1";
 
