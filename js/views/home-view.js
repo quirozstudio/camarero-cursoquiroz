@@ -1,4 +1,4 @@
-import { icon } from "../components/icons.js?v=0.2.2";
+import { icon } from "../components/icons.js?v=0.2.3";
 
 export const renderHome = ({ course, region }) => `
   <section class="view">

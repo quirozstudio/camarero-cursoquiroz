@@ -1,4 +1,4 @@
-export const buildCertificateDraft = ({ user, course, region, issuedAt = new Date().toISOString() }) => {
+export const buildCertificateDraft = ({ user, course, region, stats, issuedAt = new Date().toISOString() }) => {
   const date = new Date(issuedAt).toLocaleDateString(region.locale);
   const studentName = user.name || "Alumno";
   const seed = `${course.id}-${studentName}-${issuedAt}`;
@@ -9,9 +9,12 @@ export const buildCertificateDraft = ({ user, course, region, issuedAt = new Dat
     studentName,
     courseName: course.title,
     issuer: region.certificate.issuer,
+    modulesCompleted: stats?.completedModules || course.modules.length,
+    totalModules: stats?.totalModules || course.modules.length,
+    finalExamScore: Number.isFinite(stats?.finalExam?.score) ? stats.finalExam.score : null,
     date,
     issuedAt,
     code,
-    verificationUrl: `${region.certificate.verificationBaseUrl}/${code}`,
+    verificationUrl: null,
   };
 };

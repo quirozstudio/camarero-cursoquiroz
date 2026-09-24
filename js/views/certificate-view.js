@@ -1,7 +1,7 @@
-import { icon } from "../components/icons.js?v=0.2.2";
-import { buildCertificateDraft } from "../services/certificate-service.js?v=0.2.2";
-import { getCourseStats } from "../services/course-service.js?v=0.2.2";
-import { getState, saveState } from "../services/storage-service.js?v=0.2.2";
+import { icon } from "../components/icons.js?v=0.2.3";
+import { buildCertificateDraft } from "../services/certificate-service.js?v=0.2.3";
+import { getCourseStats } from "../services/course-service.js?v=0.2.3";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.3";
 
 const escapeHtml = (value = "") =>
   String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
@@ -60,39 +60,61 @@ export const renderCertificate = ({ state, course, region }) => {
       <div class="section-title certificate-heading">
         <div>
           <h2>Certificado</h2>
-          <p>Certificado de aprovechamiento listo para imprimir o guardar como PDF.</p>
+          <p>Tu acreditación de aprovechamiento está lista para imprimir o guardar como PDF.</p>
         </div>
-        <button class="btn" data-print-certificate>${icon("award")}Imprimir / Guardar PDF</button>
+        <button class="btn" type="button" data-print-certificate>${icon("award")}Imprimir / Guardar PDF</button>
       </div>
-      <article class="certificate-preview certificate-ready" id="certificate-print-area">
-        <span class="eyebrow">Aprobado</span>
-        <p class="certificate-kicker">PRIMER TURNO</p>
-        <h1>${escapeHtml(certificate.courseName)}</h1>
-        <p>Se reconoce a</p>
-        <h2>${escapeHtml(certificate.studentName)}</h2>
-        <p>por haber completado la formación práctica y superado el examen final.</p>
-        <div class="certificate-details">
-          <span><small>Fecha</small>${escapeHtml(certificate.date)}</span>
-          <span><small>Emisor</small>${escapeHtml(certificate.issuer)}</span>
-          <span><small>Código</small>${escapeHtml(certificate.code)}</span>
+      <article class="certificate-preview certificate-ready" id="certificate-print-area" aria-label="Certificado de ${escapeHtml(certificate.studentName)}">
+        <div class="certificate-border" aria-hidden="true"></div>
+        <div class="certificate-topline">
+          <div class="certificate-brand">
+            <img src="./img/logo-quiroz.jpeg" alt="" />
+            <span>PRIMER TURNO</span>
+          </div>
+          <div class="certificate-seal">${icon("award")}<span>APROBADO</span></div>
         </div>
-        <a class="certificate-code" href="${certificate.verificationUrl}" aria-label="URL de verificación">${certificate.verificationUrl}</a>
-        <p class="certificate-note">No es un título oficial. Acredita la finalización de esta formación privada.</p>
+        <p class="certificate-kicker">CERTIFICADO DE APROVECHAMIENTO</p>
+        <h1>${escapeHtml(certificate.courseName)}</h1>
+        <div class="certificate-divider" aria-hidden="true"><span></span><i></i><span></span></div>
+        <p class="certificate-intro">Se reconoce que</p>
+        <h2>${escapeHtml(certificate.studentName)}</h2>
+        <p class="certificate-description">ha completado la formación práctica y superado el examen final de <strong>Primer Turno</strong>.</p>
+        <div class="certificate-summary">
+          <span><strong>${escapeHtml(certificate.modulesCompleted)}</strong><small>módulos completados</small></span>
+          <span><strong>${escapeHtml(certificate.finalExamScore ?? "—")}<em>${certificate.finalExamScore !== null ? "%" : ""}</em></strong><small>resultado del examen</small></span>
+        </div>
+        <div class="certificate-details">
+          <span><small>Fecha de emisión</small>${escapeHtml(certificate.date)}</span>
+          <span><small>Emisor</small>${escapeHtml(certificate.issuer)}</span>
+          <span><small>Código de emisión</small>${escapeHtml(certificate.code)}</span>
+        </div>
+        <div class="certificate-footer">
+          <div class="certificate-signature">
+            <span class="signature-line">Quiroz Academy</span>
+            <small>Dirección académica</small>
+          </div>
+          <div class="certificate-verification">
+            <strong>${escapeHtml(certificate.code)}</strong>
+            <small>Conserva este código como referencia de tu certificado.</small>
+          </div>
+        </div>
+        <p class="certificate-note">Acreditación de una formación privada. La verificación pública se activará al conectar la plataforma.</p>
       </article>
     </section>
   `;
 };
 
-export const bindCertificate = ({ state, course, region }) => {
+export const bindCertificate = ({ state, course, region, navigate }) => {
   if (!state.certificates?.[course.id]) {
     document.querySelector("[data-generate-certificate]")?.addEventListener("click", () => {
-      const certificate = buildCertificateDraft({ user: state.user, course, region });
       const currentState = getState();
+      const stats = getCourseStats(currentState, course);
+      const certificate = buildCertificateDraft({ user: currentState.user, course, region, stats });
       saveState({
         ...currentState,
         certificates: { ...currentState.certificates, [course.id]: certificate },
       });
-      window.location.reload();
+      navigate("certificate");
     });
   }
 

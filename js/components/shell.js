@@ -1,5 +1,5 @@
-import { courses } from "../data/courses.js?v=0.2.2";
-import { icon } from "./icons.js?v=0.2.2";
+import { courses } from "../data/courses.js?v=0.2.3";
+import { icon } from "./icons.js?v=0.2.3";
 
 const navItems = [
   ["home", "Inicio", "home"],

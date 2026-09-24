@@ -1,4 +1,4 @@
-import { icon } from "./icons.js?v=0.2.2";
+import { icon } from "./icons.js?v=0.2.3";
 
 const placeholderText = "Pendiente de contenido.";
 

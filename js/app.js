@@ -1,7 +1,7 @@
-import { renderShell } from "./components/shell.js?v=0.2.2";
-import { routes } from "./routes.js?v=0.2.2";
-import { getCurrentCourse, getRegionById } from "./services/course-service.js?v=0.2.2";
-import { getState, saveState } from "./services/storage-service.js?v=0.2.2";
+import { renderShell } from "./components/shell.js?v=0.2.3";
+import { routes } from "./routes.js?v=0.2.3";
+import { getCurrentCourse, getRegionById } from "./services/course-service.js?v=0.2.3";
+import { getState, saveState } from "./services/storage-service.js?v=0.2.3";
 
 const app = document.querySelector("#app");
 

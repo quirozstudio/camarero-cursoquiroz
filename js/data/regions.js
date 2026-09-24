@@ -17,7 +17,7 @@ export const regions = [
     },
     certificate: {
       issuer: "Quiroz Academy",
-      verificationBaseUrl: "/certificados/verificar",
+      verificationEnabled: false,
     },
   },
 ];
