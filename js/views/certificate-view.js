@@ -1,7 +1,7 @@
-import { icon } from "../components/icons.js?v=0.2.3";
-import { buildCertificateDraft } from "../services/certificate-service.js?v=0.2.3";
-import { getCourseStats } from "../services/course-service.js?v=0.2.3";
-import { getState, saveState } from "../services/storage-service.js?v=0.2.3";
+import { icon } from "../components/icons.js?v=0.2.4";
+import { buildCertificateDraft } from "../services/certificate-service.js?v=0.2.4";
+import { getCourseStats } from "../services/course-service.js?v=0.2.4";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.4";
 
 const escapeHtml = (value = "") =>
   String(value).replace(/[&<>'"]/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "'": "&#39;", '"': "&quot;" })[character]);
@@ -55,6 +55,9 @@ export const renderCertificate = ({ state, course, region }) => {
     `;
   }
 
+  const modulesCompleted = certificate.modulesCompleted ?? stats.completedModules;
+  const finalExamScore = Number.isFinite(certificate.finalExamScore) ? certificate.finalExamScore : stats.finalExam?.score ?? null;
+
   return `
     <section class="view">
       <div class="section-title certificate-heading">
@@ -80,8 +83,8 @@ export const renderCertificate = ({ state, course, region }) => {
         <h2>${escapeHtml(certificate.studentName)}</h2>
         <p class="certificate-description">ha completado la formación práctica y superado el examen final de <strong>Primer Turno</strong>.</p>
         <div class="certificate-summary">
-          <span><strong>${escapeHtml(certificate.modulesCompleted)}</strong><small>módulos completados</small></span>
-          <span><strong>${escapeHtml(certificate.finalExamScore ?? "—")}<em>${certificate.finalExamScore !== null ? "%" : ""}</em></strong><small>resultado del examen</small></span>
+          <span><strong>${escapeHtml(modulesCompleted)}</strong><small>módulos completados</small></span>
+          <span><strong>${escapeHtml(finalExamScore ?? "—")}<em>${finalExamScore !== null ? "%" : ""}</em></strong><small>resultado del examen</small></span>
         </div>
         <div class="certificate-details">
           <span><small>Fecha de emisión</small>${escapeHtml(certificate.date)}</span>
