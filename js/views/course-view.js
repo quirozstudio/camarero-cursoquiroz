@@ -1,5 +1,5 @@
-import { icon } from "../components/icons.js?v=0.2.1";
-import { getCourseModules, isModuleUnlocked } from "../services/course-service.js?v=0.2.1";
+import { icon } from "../components/icons.js?v=0.2.2";
+import { getCourseModules, isModuleUnlocked } from "../services/course-service.js?v=0.2.2";
 
 export const renderCourse = ({ state, course, region }) => {
   const modules = getCourseModules(course);

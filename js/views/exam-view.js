@@ -1,8 +1,8 @@
-import { icon } from "../components/icons.js?v=0.2.1";
-import { finalExamTemplates } from "../data/exams.js?v=0.2.1";
-import { getCourseStats } from "../services/course-service.js?v=0.2.1";
-import { gradeQuiz } from "../services/quiz-service.js?v=0.2.1";
-import { getState, saveState } from "../services/storage-service.js?v=0.2.1";
+import { icon } from "../components/icons.js?v=0.2.2";
+import { finalExamTemplates } from "../data/exams.js?v=0.2.2";
+import { getCourseStats } from "../services/course-service.js?v=0.2.2";
+import { gradeQuiz } from "../services/quiz-service.js?v=0.2.2";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.2";
 
 const getExam = (course) => finalExamTemplates.find((exam) => exam.courseId === course.id) || finalExamTemplates[0];
 
@@ -126,7 +126,7 @@ const renderExamResult = ({ state, course, exam }) => {
   `;
 };
 
-export const bindExam = ({ course }) => {
+export const bindExam = ({ course, navigate }) => {
   document.querySelectorAll("[data-restart-final-exam]").forEach((button) => {
     button.addEventListener("click", () => {
       const state = getState();
@@ -136,7 +136,7 @@ export const bindExam = ({ course }) => {
         route: "exam",
         params: { mode: "exam", questionIndex: 0 },
       });
-      window.location.reload();
+      navigate("exam", { mode: "exam", questionIndex: 0 });
     });
   });
 
@@ -176,7 +176,7 @@ export const bindExam = ({ course }) => {
         route: "exam",
         params: { mode: "exam", questionIndex: questionIndex + 1 },
       });
-      window.location.reload();
+      navigate("exam", { mode: "exam", questionIndex: questionIndex + 1 });
       return;
     }
 
@@ -191,6 +191,6 @@ export const bindExam = ({ course }) => {
       route: "exam",
       params: { mode: "result" },
     });
-    window.location.reload();
+    navigate("exam", { mode: "result" });
   });
 };

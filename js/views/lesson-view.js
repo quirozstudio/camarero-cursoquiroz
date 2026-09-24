@@ -1,4 +1,4 @@
-import { icon } from "../components/icons.js?v=0.2.1";
+import { icon } from "../components/icons.js?v=0.2.2";
 import {
   renderAdviceCard,
   renderChapterBanner,
@@ -8,11 +8,11 @@ import {
   renderPracticeCard,
   renderReminderCard,
   renderSummaryPanel,
-} from "../components/learning-components.js?v=0.2.1";
-import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js?v=0.2.1";
-import { getState, saveState } from "../services/storage-service.js?v=0.2.1";
-import { moduleContent } from "../data/course-content.js?v=0.2.1";
-import { gradeQuiz } from "../services/quiz-service.js?v=0.2.1";
+} from "../components/learning-components.js?v=0.2.2";
+import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js?v=0.2.2";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.2";
+import { moduleContent } from "../data/course-content.js?v=0.2.2";
+import { gradeQuiz } from "../services/quiz-service.js?v=0.2.2";
 
 export const renderLesson = ({ state, course, region }) => {
   const moduleId = state.params.moduleId || "arrival";
@@ -419,7 +419,7 @@ export const bindLesson = ({ navigate }) => {
         route: "lesson",
         params: { moduleId, mode: "test", questionIndex: questionIndex + 1 },
       });
-      window.location.reload();
+      navigate("lesson", { moduleId, mode: "test", questionIndex: questionIndex + 1 });
       return;
     }
 
@@ -456,7 +456,7 @@ export const bindLesson = ({ navigate }) => {
       },
     });
 
-    window.location.reload();
+    navigate("lesson", { moduleId, mode: "result" });
   });
 
   document.querySelector("[data-complete-module]")?.addEventListener("click", (event) => {
@@ -475,6 +475,6 @@ export const bindLesson = ({ navigate }) => {
       route: "lesson",
       params: { moduleId, completed: true, mode: "complete" },
     });
-    window.location.reload();
+    navigate("lesson", { moduleId, completed: true, mode: "complete" });
   });
 };

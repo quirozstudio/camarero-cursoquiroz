@@ -1,5 +1,5 @@
-import { courses, modules } from "../data/courses.js?v=0.2.1";
-import { regions } from "../data/regions.js?v=0.2.1";
+import { courses, modules } from "../data/courses.js?v=0.2.2";
+import { regions } from "../data/regions.js?v=0.2.2";
 
 export const getCurrentCourse = (courseId) => courses.find((course) => course.id === courseId) || courses[0];
 
