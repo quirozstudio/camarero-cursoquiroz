@@ -395,6 +395,67 @@ export const moduleContent = {
         ],
       },
       {
+        type: "drink-guide",
+        title: "Bebidas habituales en Pamplona",
+        paragraphs: [
+          "En barra conviene reconocer los nombres habituales y preparar cada bebida con el mismo orden. Esta es la referencia práctica de este curso.",
+          "Los formatos pueden recibir nombres distintos en otros locales, así que observa siempre la forma de trabajar del equipo.",
+        ],
+        table: {
+          title: "Chuleta rápida de barra",
+          columns: ["Pedido", "Servicio"],
+          rows: [
+            ["Caña", "Vaso de sidra pequeño · sin hielo"],
+            ["Cañón", "Vaso de sidra · sin hielo"],
+            ["Zurito / mini", "Medio vaso de sidra pequeño · sin hielo"],
+            ["Vermouth / marianito", "Vaso de sidra · 3 hielos · naranja y aceituna"],
+            ["Mosto / mini mosto", "Vaso de sidra · 3 hielos · naranja y aceituna"],
+            ["Refrescos", "Vaso de sidra · 3 hielos · limón; Kas Naranja, con naranja"],
+          ],
+        },
+        cards: [
+          {
+            category: "beer",
+            title: "Caña, cañón y zurito",
+            meta: "Cerveza de barra",
+            details: [
+              "Caña: vaso de sidra pequeño.",
+              "Cañón: vaso de sidra.",
+              "Zurito y mini: mismo formato, medio vaso de sidra pequeño.",
+              "Los tres se sirven sin hielo.",
+            ],
+          },
+          {
+            title: "Vermouth y mosto",
+            meta: "Servicio con acompañamiento",
+            details: [
+              "Vaso de sidra.",
+              "Tres hielos.",
+              "Naranja y aceituna.",
+              "Aplica igual para vermouth, marianito, mosto y mini mosto.",
+            ],
+          },
+          {
+            title: "Refrescos",
+            meta: "Fríos y fáciles de reconocer",
+            details: [
+              "Vaso de sidra con tres hielos.",
+              "Coca-Cola, tónica y Nestea: limón.",
+              "Kas Naranja: naranja.",
+            ],
+          },
+          {
+            title: "Vino y cubata",
+            meta: "Dos servicios que requieren medida",
+            details: [
+              "Vino: copa llena algo menos de la mitad.",
+              "Cubata: vaso de combinado con hielo.",
+              "Cuenta aproximadamente 5–6 para servir el alcohol y completa con refresco.",
+            ],
+          },
+        ],
+      },
+      {
         type: "questions",
         title: "La pregunta útil",
         paragraphs: [
@@ -449,10 +510,31 @@ export const moduleContent = {
         "Pregunta antes de cambiar la organización.",
       ],
     },
+    drinkPractice: {
+      title: "Mini práctica · Preparar un marianito",
+      body: "Un cliente te pide un vermouth o marianito. Antes de llevarlo, comprueba que respetas el servicio aprendido.",
+      prompt: "¿Cuál es la preparación correcta?",
+      options: [
+        {
+          label: "Vaso de sidra, tres hielos, naranja y aceituna.",
+          isCorrect: true,
+          feedback: "Correcto. El marianito se sirve con hielo y sus dos acompañamientos.",
+        },
+        {
+          label: "Vaso de sidra pequeño y sin hielo, como una caña.",
+          feedback: "No. Ese es el formato de la caña; el marianito lleva tres hielos, naranja y aceituna.",
+        },
+        {
+          label: "Copa de vino llena hasta la mitad y con limón.",
+          feedback: "No. La copa de vino y los refrescos tienen otro servicio diferente.",
+        },
+      ],
+      takeaway: "Antes de salir de la barra, piensa en tres cosas: vaso, hielo y acompañamiento.",
+    },
     summary: {
       title: "Resumen",
       body:
-        "Preparar la barra significa dejar el puesto listo para trabajar con rapidez. Revisa vasos, servilletas, zona de café, limpieza y reposición. No cambies el sistema del local sin preguntar: observa, ayuda y anticípate con criterio.",
+        "Preparar la barra significa dejar el puesto listo para trabajar con rapidez. Revisa vasos, servilletas, zona de café, limpieza y reposición. Reconoce cañas, cañones, zuritos, refrescos, vinos, vermouths y cubatas según la referencia del local. No cambies el sistema sin preguntar: observa, ayuda y anticípate con criterio.",
     },
     completion: {
       eyebrow: "Barra completada",

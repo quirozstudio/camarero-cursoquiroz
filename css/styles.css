@@ -1391,6 +1391,23 @@ blockquote {
   gap: 12px;
 }
 
+.content-drink-guide {
+  grid-column: 1 / -1;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--gold) 10%, transparent), transparent 42%),
+    var(--surface-strong);
+}
+
+.drink-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.drink-card-grid .product-card {
+  height: 100%;
+}
+
 .learning-card,
 .component-block,
 .product-card,
@@ -2122,6 +2139,10 @@ th {
 }
 
 @media (max-width: 640px) {
+  .drink-card-grid {
+    grid-template-columns: 1fr;
+  }
+
   .certificate-ready {
     min-height: 0;
     padding: 38px 24px;

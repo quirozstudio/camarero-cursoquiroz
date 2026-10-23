@@ -38,6 +38,7 @@ start-primer-turno.bat
 - Cinco preguntas por módulo y feedback de respuestas.
 - Examen final de 10 preguntas con nota mínima del 80%.
 - Progreso, intentos y perfil guardados en el navegador.
+- Guía práctica de bebidas habituales en Pamplona, con medidas, vasos, hielo y acompañamientos.
 - Certificado con código único e impresión o guardado como PDF desde el navegador.
 - Navegación con rutas compartibles e historial del navegador.
 

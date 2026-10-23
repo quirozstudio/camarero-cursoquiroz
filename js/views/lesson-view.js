@@ -7,12 +7,15 @@ import {
   renderMistakeCard,
   renderPracticeCard,
   renderReminderCard,
+  renderDrinkCard,
+  renderBeerCard,
+  renderDataTable,
   renderSummaryPanel,
-} from "../components/learning-components.js?v=0.2.3";
-import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js?v=0.2.3";
-import { getState, saveState } from "../services/storage-service.js?v=0.2.3";
-import { moduleContent } from "../data/course-content.js?v=0.2.3";
-import { gradeQuiz } from "../services/quiz-service.js?v=0.2.3";
+} from "../components/learning-components.js?v=0.2.5";
+import { getModuleById, getNextModule, isModuleUnlocked } from "../services/course-service.js?v=0.2.5";
+import { getState, saveState } from "../services/storage-service.js?v=0.2.5";
+import { moduleContent } from "../data/course-content.js?v=0.2.5";
+import { gradeQuiz } from "../services/quiz-service.js?v=0.2.5";
 
 export const renderLesson = ({ state, course, region }) => {
   const moduleId = state.params.moduleId || "arrival";
@@ -105,8 +108,19 @@ export const renderLesson = ({ state, course, region }) => {
           ${renderPracticeCard(content.practice || { title: "Mini práctica" })}
         </section>
 
+        ${
+          content.drinkPractice
+            ? `
+              <section class="chapter-section">
+                <span class="chapter-step">07</span>
+                ${renderPracticeCard(content.drinkPractice)}
+              </section>
+            `
+            : ""
+        }
+
         <section class="chapter-section">
-          <span class="chapter-step">07</span>
+          <span class="chapter-step">${content.drinkPractice ? "08" : "07"}</span>
           ${renderInlineTestPreview({
             moduleId: module.id,
             body: content.quiz?.length ? "Comprueba lo aprendido antes de continuar." : "Test preparado. Las preguntas se añadirán después.",
@@ -114,7 +128,7 @@ export const renderLesson = ({ state, course, region }) => {
         </section>
 
         <section class="chapter-section">
-          <span class="chapter-step">08</span>
+          <span class="chapter-step">${content.drinkPractice ? "09" : "08"}</span>
           ${renderSummaryPanel(content.summary || { title: "Resumen", body: "Texto de ejemplo. Cierre del capitulo con las ideas que deben quedar claras antes de continuar." })}
         </section>
 
@@ -139,7 +153,12 @@ const renderContentBlocks = (blocks = []) => {
   return items.map(renderContentBlock).join("");
 };
 
-const renderContentBlock = (block) => `
+const renderContentBlock = (block) => {
+  if (block.type === "drink-guide") {
+    return renderDrinkGuideBlock(block);
+  }
+
+  return `
   <article class="content-block rich-content-block ${block.type ? `content-${block.type}` : ""}">
     <h3>${block.title}</h3>
     ${block.media ? renderMediaFrame({ ...block.media, ratio: block.media.ratio || "compact" }) : ""}
@@ -149,6 +168,28 @@ const renderContentBlock = (block) => `
     ${block.list ? `<ul>${block.list.map((item) => `<li>${item}</li>`).join("")}</ul>` : ""}
     ${block.quotes ? block.quotes.map((quote) => `<blockquote>${quote}</blockquote>`).join("") : ""}
     ${block.closing ? `<p class="lesson-copy">${block.closing}</p>` : ""}
+  </article>
+`;
+};
+
+const renderDrinkGuideBlock = ({ title, paragraphs = [], cards = [], table } = {}) => `
+  <article class="content-block rich-content-block content-drink-guide">
+    <h3>${title}</h3>
+    ${paragraphs.map((paragraph) => `<p class="lesson-copy">${paragraph}</p>`).join("")}
+    ${
+      table
+        ? renderDataTable({
+            title: table.title,
+            columns: table.columns,
+            rows: table.rows,
+          })
+        : ""
+    }
+    <div class="drink-card-grid">
+      ${cards
+        .map((card) => (card.category === "beer" ? renderBeerCard(card) : renderDrinkCard(card)))
+        .join("")}
+    </div>
   </article>
 `;
 
